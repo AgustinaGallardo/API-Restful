@@ -24,7 +24,7 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<String> addClient(@Validated @RequestBody ClientDto clientDto) throws MyException {
 
         clientService.addClient(clientDto);
