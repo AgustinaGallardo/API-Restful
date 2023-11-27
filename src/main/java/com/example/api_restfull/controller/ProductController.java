@@ -1,4 +1,5 @@
 package com.example.api_restfull.controller;
+import com.example.api_restfull.dto.ClientDto;
 import com.example.api_restfull.dto.ProductDto;
 import com.example.api_restfull.exceptions.MyException;
 import com.example.api_restfull.service.ProductService;
@@ -23,4 +24,11 @@ public class ProductController {
         productService.addProduct(productDto);
         return new ResponseEntity<>("Product added successfully", HttpStatus.CREATED);
     }
+
+    @PutMapping("/update/{productId}")
+    public ResponseEntity<String> updateClient(@PathVariable Long productId, @Validated @RequestBody ProductDto updatedProductDto) throws MyException {
+        productService.updateClient(productId, updatedProductDto);
+        return new ResponseEntity<>("Product updated successfully", HttpStatus.OK);
+    }
+
 }

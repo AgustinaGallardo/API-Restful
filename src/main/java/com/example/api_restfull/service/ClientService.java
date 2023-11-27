@@ -5,6 +5,7 @@ import com.example.api_restfull.entity.Client;
 import com.example.api_restfull.exceptions.MyException;
 import com.example.api_restfull.repository.ClientRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,9 +42,15 @@ public class ClientService {
     }
 
 
+    public void updateClient(Long clientId, ClientDto updatedClientDto) {
 
+                Client existingClient = clientRepository.findById(String.valueOf(clientId))
+                .orElseThrow(() -> new EntityNotFoundException("Cliente no encontrado con ID: " + clientId));
 
+        existingClient.setPhone(updatedClientDto.phone());
+        existingClient.setEmail(updatedClientDto.email());
 
+        clientRepository.save(existingClient);
 
-
+    }
 }

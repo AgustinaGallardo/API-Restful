@@ -20,4 +20,6 @@ public class Product {
     private long idProduct;
     private String nameProdcut;
     private float priceProduct;
+
+    private boolean active;
 }

@@ -28,7 +28,7 @@ public class OrderService {
     @Transactional
     public void addOrder(OrderDto orderDto){
         Order order = orderMapper.convertToEntity(orderDto);
-        order.setDateOrder();  //buscar poner
+        //order.setDateOrder();  buscar poner
         orderRepository.save(order);
     }
 

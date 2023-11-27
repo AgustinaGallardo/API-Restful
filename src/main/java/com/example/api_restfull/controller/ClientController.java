@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/clients")
@@ -27,7 +24,11 @@ public class ClientController {
         return new ResponseEntity<>("Client added successfully", HttpStatus.CREATED);
     }
 
-
+    @PutMapping("/update/{clientId}")
+    public ResponseEntity<String> updateClient(@PathVariable Long clientId, @Validated @RequestBody ClientDto updatedClientDto) throws MyException {
+        clientService.updateClient(clientId, updatedClientDto);
+        return new ResponseEntity<>("Client updated successfully", HttpStatus.OK);
+    }
 
 
 }
