@@ -1,13 +1,11 @@
 package com.example.api_restfull.entity;
-
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,10 +19,14 @@ public class Order{
      @Column(name = "id_order")
     private long idOrder;
     @ManyToOne
+    @JoinColumn(name = "id_client")
     private Client clientOrder;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOrder;
 
-
+    @OneToMany
+    @JoinColumn(name = "id_product")
+    private List<Product> products;
 
 }

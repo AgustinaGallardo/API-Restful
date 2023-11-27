@@ -25,12 +25,10 @@ public class ClientService {
 
     @Transactional
     public void addClient(ClientDto clientDto) throws MyException {
-        // Puedes agregar validaciones adicionales aquí si es necesario
 
         // Convierte el DTO a la entidad Client utilizando ModelMapper
         Client client = clientMapper.convertToEntity(clientDto);
 
-        // Guarda la entidad en la base de datos
         clientRepository.save(client);
     }
     private void validation(String email, String phone) throws MyException {

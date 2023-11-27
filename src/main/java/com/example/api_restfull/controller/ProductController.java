@@ -18,7 +18,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<String> addProduct(@Validated @RequestBody ProductDto productDto) throws MyException {
         productService.addProduct(productDto);
         return new ResponseEntity<>("Product added successfully", HttpStatus.CREATED);

@@ -1,5 +1,4 @@
 package com.example.api_restfull.controller;
-
 import com.example.api_restfull.dto.ClientDto;
 import com.example.api_restfull.exceptions.MyException;
 import com.example.api_restfull.service.ClientService;
@@ -15,10 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/clients")
 public class ClientController {
-
-
     private final ClientService clientService;
-
     @Autowired
     public ClientController(ClientService clientService) {
         this.clientService = clientService;
