@@ -1,8 +1,17 @@
 package com.example.api_restfull.dto;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class ProductDto{
         @NotBlank(message = "IdProduct cannot be blank")
         private long idProduct;

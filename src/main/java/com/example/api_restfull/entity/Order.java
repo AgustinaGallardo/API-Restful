@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import java.util.Date;
 import java.util.List;
-
+/**
 @Entity
 @Data
 @AllArgsConstructor
@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "`customer_order`")
 public class Order{
+
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
      @Column(name = "id_order")
@@ -25,8 +26,8 @@ public class Order{
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOrder;
 
-    @OneToMany
-    @JoinColumn(name = "id_product")
+    @OneToMany(mappedBy = "order")
     private List<Product> products;
 
 }
+        */
