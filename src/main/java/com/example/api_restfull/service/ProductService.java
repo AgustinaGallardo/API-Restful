@@ -3,6 +3,7 @@ package com.example.api_restfull.service;
 import com.example.api_restfull.converter.ProductMapper;
 import com.example.api_restfull.dto.ClientDto;
 import com.example.api_restfull.dto.ProductDto;
+import com.example.api_restfull.entity.Client;
 import com.example.api_restfull.entity.Product;
 import com.example.api_restfull.exceptions.MyException;
 import com.example.api_restfull.repository.ProductRepository;
@@ -10,6 +11,8 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 
@@ -47,5 +50,10 @@ public class ProductService {
 
         productReposity.save(product);
 
+    }
+
+    public List<ProductDto> getAllProducts() {
+        List<Product> lstProducts = productReposity.findAll();
+        return productMapper.convertToDtoList(lstProducts);
     }
 }

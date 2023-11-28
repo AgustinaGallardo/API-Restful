@@ -10,6 +10,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClientService {
 
@@ -44,13 +46,18 @@ public class ClientService {
 
     public void updateClient(Long clientId, ClientDto updatedClientDto) {
 
-                Client existingClient = clientRepository.findById(String.valueOf(clientId))
+                Client existingClient = clientRepository.findById(clientId)
                 .orElseThrow(() -> new EntityNotFoundException("Cliente no encontrado con ID: " + clientId));
 
-        existingClient.setPhone(updatedClientDto.phone());
-        existingClient.setEmail(updatedClientDto.email());
+        existingClient.setPhone(updatedClientDto.getPhone());
+        existingClient.setEmail(updatedClientDto.getEmail());
 
         clientRepository.save(existingClient);
 
+    }
+
+    public List<ClientDto> getAllClients() {
+        List<Client> lstClients = clientRepository.findAll();
+        return clientMapper.convertToDtoList(lstClients);
     }
 }

@@ -4,6 +4,8 @@ import com.example.api_restfull.entity.Client;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ClientMapper{
@@ -19,6 +21,12 @@ public class ClientMapper{
 
     public Client convertToEntity(ClientDto clientDto) {
         return modelMapper.map(clientDto, Client.class);
+    }
+
+    public List<ClientDto> convertToDtoList(List<Client> clients) {
+        return clients.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
 }

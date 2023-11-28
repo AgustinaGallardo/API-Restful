@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/clients")
 public class ClientController {
@@ -28,6 +30,12 @@ public class ClientController {
     public ResponseEntity<String> updateClient(@PathVariable Long clientId, @Validated @RequestBody ClientDto updatedClientDto) throws MyException {
         clientService.updateClient(clientId, updatedClientDto);
         return new ResponseEntity<>("Client updated successfully", HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ClientDto>> getAllClients() {
+        List<ClientDto> clients = clientService.getAllClients();
+        return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 
 
