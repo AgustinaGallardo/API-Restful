@@ -21,4 +21,6 @@ public class ClientDto {
     @Email(message = "Invalid email address")
     private String email;
 
+    private boolean isActive = true;
+
 }

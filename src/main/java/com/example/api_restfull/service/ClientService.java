@@ -27,22 +27,23 @@ public class ClientService {
     }
 
     @Transactional
-    public void addClient(ClientDto clientDto) throws MyException {
+    public ClientDto addClient(ClientDto clientDto) throws MyException {
 
-        // Convierte el DTO a la entidad Client utilizando ModelMapper
+        validate(clientDto);
+
         Client client = clientMapper.convertToEntity(clientDto);
 
         clientRepository.save(client);
+        return clientMapper.convertToDto(client);
     }
-    private void validation(String email, String phone) throws MyException {
-        if(email.isEmpty()){
+    private void validate(ClientDto clientDto) throws MyException {
+        if(clientDto.getEmail().isEmpty()){
         throw new MyException("El email no puede estar vacio");
         }
-        if(phone.isEmpty()){
+        if(clientDto.getPhone().isEmpty()){
             throw new MyException("El teleofno no puede estar vacio");
         }
     }
-
 
     public void updateClient(Long clientId, ClientDto updatedClientDto) {
 
@@ -53,11 +54,38 @@ public class ClientService {
         existingClient.setEmail(updatedClientDto.getEmail());
 
         clientRepository.save(existingClient);
-
     }
 
     public List<ClientDto> getAllClients() {
         List<Client> lstClients = clientRepository.findAll();
         return clientMapper.convertToDtoList(lstClients);
     }
+
+
+    public ClientDto deactivateClient(Long id_client) {
+        Client client = clientRepository.findById(id_client).orElse(null);
+
+        if (client != null) {
+            client.setActive(false);
+            Client savedClient = clientRepository.save(client);
+            return clientMapper.convertToDto(savedClient);
+        } else {
+            System.out.println("It wasn´t possible to find a client with the ID: " + id_client);
+            return null;
+        }
+    }
+
+    public ClientDto findClientById(long id_client) {
+
+        Client client = clientRepository.findById(id_client).orElse(null);
+
+        if (client != null) {
+            return clientMapper.convertToDto(client);
+        } else {
+            System.out.println("It wasn´t possible to find a client with the ID: " + id_client);
+            return null;
+        }
+    }
+
+
 }

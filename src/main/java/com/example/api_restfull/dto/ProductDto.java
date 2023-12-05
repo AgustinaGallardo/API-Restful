@@ -19,4 +19,6 @@ public class ProductDto{
         private String name;
         @Min(value = 0, message = "PriceProduct must be greater than or equal to 0")
         private float priceProduct;
+
+        private boolean isActive = true;
 }

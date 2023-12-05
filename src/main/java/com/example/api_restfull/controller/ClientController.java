@@ -38,5 +38,16 @@ public class ClientController {
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 
+    @PutMapping("/deactivate/{id_client}")
+    public ResponseEntity<ClientDto> deactivateClient(@PathVariable Long id_client) throws MyException {
+
+        ClientDto clientDTO = clientService.findClientById(id_client);
+        if (clientDTO != null) {
+            ClientDto deactivatedClientDTO = clientService.deactivateClient(id_client);
+            return ResponseEntity.status(HttpStatus.OK).body(deactivatedClientDTO);
+        } else {
+            return ResponseEntity.status((HttpStatus.NOT_FOUND)).body(null);
+        }
+    }
 
 }
