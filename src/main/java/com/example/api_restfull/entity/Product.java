@@ -21,5 +21,5 @@ public class Product {
     private String nameProdcut;
     private float priceProduct;
 
-    private boolean active;
+    private boolean isActive;
 }

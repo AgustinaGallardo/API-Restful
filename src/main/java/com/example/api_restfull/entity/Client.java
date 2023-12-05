@@ -17,6 +17,6 @@ public class Client {
         private long idClient;
         private String email;
         private String phone;
-        private boolean active;
+        private boolean isActive;
 
 }

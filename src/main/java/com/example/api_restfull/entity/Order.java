@@ -1,18 +1,16 @@
 package com.example.api_restfull.entity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import java.util.Date;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+import java.time.LocalDate;
 import java.util.List;
-/**
+
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@NoArgsConstructor
-@Table(name = "`customer_order`")
 public class Order{
 
      @Id
@@ -23,11 +21,14 @@ public class Order{
     @JoinColumn(name = "id_client")
     private Client clientOrder;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateOrder;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate date = LocalDate.now();
 
     @OneToMany(mappedBy = "order")
     private List<Product> products;
 
+    private Long orderNumber;
+    private boolean isActive;
+
 }
-        */
